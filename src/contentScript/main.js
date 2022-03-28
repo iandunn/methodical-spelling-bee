@@ -162,7 +162,7 @@ function parseTwoLetterList( todaysHints ) {
 
 		list[ key ] = {
 			found: 0,
-			total: count
+			total: parseInt( count ),
 		}
 	}
 

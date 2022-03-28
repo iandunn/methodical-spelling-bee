@@ -42,6 +42,8 @@ devex
 
 post launch
 
+- [ ] add the matrix os start+count, not sure how to show checkbox
+
 - [ ] keep alphabetical sort, but move completed to bottom of list (still alpha), or separate list
 	how does this interact w/ list columns? maybe left column incomplete and right is complete? but not normal to have many fully complete
 
