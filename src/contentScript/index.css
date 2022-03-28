@@ -1,0 +1,47 @@
+/*
+
+- [ ] add colors, like green when 100% of pair found
+
+- [ ] make sure wordlist grows when needed as more words added
+	"you have words" gets cut off when make shorter than 350px, might need to adjust its styles to adapt
+
+- [ ] maybe add body class so can just make the tmp styles permanent, but only apply while node is running or whatever
+
+- [ ] make responsive
+
+- [ ] make two letter list two columns, or 3, or auto
+
+*/
+
+.sb-wordlist-box {
+	flex-basis: 350px; /* Make room for the #methodical-spelling-bee */
+	flex-grow: 0;
+}
+
+#methodical-spelling-bee {
+	margin: 12px;
+	border-radius: 6px;
+	padding: 25px;
+	border: 1px solid #dcdcdc;
+}
+
+#methodical-spelling-bee h2 {
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 1em;
+}
+
+#methodical__letter-list-progress input {
+	margin-right: 8px;
+}
+
+.methodical__pair-key {
+	padding-right: 5px;
+}
+
+
+/* tmp so can focus */
+.pz-game-header,
+.pz-ad-box {
+	display: none;
+}
