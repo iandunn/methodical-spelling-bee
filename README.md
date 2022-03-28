@@ -2,10 +2,11 @@
 
 Browser extension that tracks your progress on towards each hint for today's [NY Times Spelling Bee](https://www.nytimes.com/puzzles/spelling-bee). It doesn't show the hints until you're ready for them.
 
-{ add screenshot before ready }
+![Ícreenshot when first loads. A "ready for hints" button is displayed](.github/screenshot-not-ready.png)
 
-{ add screenshot after ready }
+<hr>
 
+![Ícreenshot after clicking the "ready" button. Then hints are displayed with a checkbox and count for each](.github/screenshot-ready.png)
 
 ## Development
 
