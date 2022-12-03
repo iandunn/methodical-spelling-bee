@@ -6,30 +6,33 @@ export function MethodicalSpellingBee() {
 	const [ loading, setLoading ] = useState( true );
 	const [ ready, setReady ]     = useState( false );
 	const [ activeLetterList, setActiveLetterList ] = useState( {} );
-
-
-	console.log( 'MethodicalSpellingBee start' );
-
 	const initialFoundWords = getFoundWords();
 
 	// Fetch today's hints when component mounts.
 	useEffect( () => {
-		console.log( 'fetch should only run once' );
+		//console.log( 'fetch should only run once' );
 		const todaysHints = getTodaysHints();
-		// warning about foundworks dependency
+		// warning about foundwords dependency
 		// maybe the below should move outside the effect, and todayshints should be use a ref to save the value outside the effect?
 
 		todaysHints.then(
 			( result ) => {
-				const emptyLetterList = parseTwoLetterList( result );
-				const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );	// set as state
-				setActiveLetterList( lettersList );
-				console.log( 'set active let list', activeLetterList ); // this shows it empty, but that's not true b/c i can see it working
-				// oh huh, when i add initialFoundWords to deps array below, then ^ starts working, but this func is called 3x a second
-				// so keep it in the deps array, and fix that constant rendering w/ useCallback(), like stackoverflow said?
-				// need to make sure it only runs once at load
+				const parser  = new DOMParser();
+				const doc     = parser.parseFromString( result, 'text/html' );
+				const wrapper = doc.querySelector( 'section.interactive-content > div.interactive-body > div' );
 
-				setLoading( false );
+				const emptyLetterList = parseTwoLetterList( wrapper.querySelector( 'p:nth-of-type( 5 )' ) );
+
+				if ( Object.keys( emptyLetterList ).length ) {
+					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );	// set as state
+					setActiveLetterList( lettersList );
+					console.log( 'set active let list', activeLetterList ); // this shows it empty, but that's not true b/c i can see it working
+					// oh huh, when i add initialFoundWords to deps array below, then ^ starts working, but this func is called 3x a second
+					// so keep it in the deps array, and fix that constant rendering w/ useCallback(), like stackoverflow said?
+					// need to make sure it only runs once at load
+
+					setLoading( false );
+				}
 			},
 
 			( error ) => {
@@ -61,10 +64,10 @@ export function MethodicalSpellingBee() {
 	// It will catch when new words are added to the found list, and update the scores.
 	// Observing the DOM instead of local storage, because the latter isn't meant to be done on the same page.
 	useEffect( () => {
-		console.log( 'start of obrserver effect', activeLetterList );
+		//console.log( 'start of obrserver effect', activeLetterList );
 
 		// to const
-		console.log( 'only register observer callback once' );
+		//console.log( 'only register observer callback once' );
 			// so maybe i do need the dependency list?
 			// oh maybe not b/c this is just registering the callback, which should only happen once?
 			// can't remove the dep array like eslint wants, that makes this run 3x a second
@@ -114,8 +117,6 @@ export function MethodicalSpellingBee() {
 
 	return (
 		<>
-			<h2>Two Letter List</h2>
-
 			{ loading &&
 				<p>Loading...</p>
 			}
@@ -147,17 +148,17 @@ async function getTodaysHints() {
 }
 
 // This just parses it out of the blog post, so it's fragile.
-function parseTwoLetterList( todaysHints ) {
-	const parser    = new DOMParser();
-	const doc       = parser.parseFromString( todaysHints, 'text/html' );
-	const node      = doc.querySelector( '.StoryBodyCompanionColumn > div > p:nth-of-type(6)' );
-	const keyCounts = node.innerHTML.replace( /<br>/g, ' ' ).split( ' ' );
+function parseTwoLetterList( node ) {
+	//rename var?
+
+	const cleanText = node.innerHTML.replace( /<.*>/g, '' ).replace( /\s+/g, ' ' ).trim();
+	const keyCounts = cleanText.split( ' ' );
 	const list      = {};
 	let key, count;
 
 	for ( let item of keyCounts ) {
 		item  = item.split( '-' );
-		key   = item[0];
+		key   = item[0].toLowerCase();
 		count = item[1];
 
 		list[ key ] = {
@@ -187,7 +188,7 @@ function bumpTwoLettersCount( letterList, foundWords ) {
 	let key;
 
 	for ( const word of foundWords ) {
-		key = word.substr( 0, 2 ).toUpperCase();
+		key = word.substring( 0, 2 ).toLowerCase();
 		letterList[ key ].found++;
 	}
 
