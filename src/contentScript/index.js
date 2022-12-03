@@ -2,18 +2,6 @@ import React                     from 'react';
 import { render }                from 'react-dom';
 import { MethodicalSpellingBee } from './main';
 
-const statusBox    = document.querySelector( '.sb-status-box' );
-const msbContainer = document.querySelector( '#methodical-spelling-bee' ); // rename to more descriptive, but still need to distinguish from nytimes elements
-
-if ( null !== statusBox && null === msbContainer ) {
-	statusBox.insertAdjacentHTML( 'beforeend', '<div id="methodical-spelling-bee"></div>' );
-
-	render(
-		<MethodicalSpellingBee />,
-		document.querySelector( '#methodical-spelling-bee' )
-	);
-}
-
 const watching = 'object' === typeof module?.hot;
 
 if ( watching ) {
@@ -33,4 +21,16 @@ if ( watching ) {
 			500
 		);
 	}
+}
+
+const statusBox    = document.querySelector( '.sb-status-box' );
+const msbContainer = document.querySelector( '#methodical-spelling-bee' ); // rename to more descriptive, but still need to distinguish from nytimes elements
+
+if ( null !== statusBox && null === msbContainer ) {
+	statusBox.insertAdjacentHTML( 'beforeend', '<div id="methodical-spelling-bee"></div>' );
+
+	render(
+		<MethodicalSpellingBee />,
+		document.querySelector( '#methodical-spelling-bee' )
+	);
 }
