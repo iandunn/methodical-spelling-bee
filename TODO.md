@@ -17,6 +17,12 @@
 
 - [ ] unit write tests for some functions
 
+- [ ] webext lint (in the dev folder) shows some errors and warnings. some of it may just be from react/webpack/etc though
+
+- [ ] handle scraping errors gracefully b/c assume will change markup etc in future
+
+- [ ] why is upstream source.js saved? what is it? i don't remember
+
 -------------------------------
 devex
 
@@ -42,7 +48,14 @@ devex
 
 post launch
 
-- [ ] add the matrix os start+count, not sure how to show checkbox
+- [ ] add overall stats
+	- [ ] WORDS: x/49
+	- [ ] POINTS: x/265
+	- [ ] PANGRAMS: x/3
+	- [ ] make the dom parsing bit DRY - have a func pull out the 2LL, grid, and stats, then pass to individual funcs to parse
+- [ ] add the matrix of start+count, not sure how to show checkbox
+
+-------------------------------
 
 - [ ] keep alphabetical sort, but move completed to bottom of list (still alpha), or separate list
 	how does this interact w/ list columns? maybe left column incomplete and right is complete? but not normal to have many fully complete
@@ -52,6 +65,3 @@ post launch
 
 - [ ] maybe publish to browser directories
 	if so, test in chrome first
-
-
--------------------------------

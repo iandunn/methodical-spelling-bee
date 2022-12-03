@@ -1,5 +1,8 @@
 /*
 
+- [ ] when stats/grid added, `#methodical-spelling-bee` is so tall that it overflow the footer
+	probably a css issue, like nyt is expecting content area to be an exact height or something
+
 - [ ] add colors, like green when 100% of pair found
 
 - [ ] make sure wordlist grows when needed as more words added
