@@ -7,26 +7,30 @@ const msbContainer = document.querySelector( '#methodical-spelling-bee' ); // re
 
 if ( null !== statusBox && null === msbContainer ) {
 	statusBox.insertAdjacentHTML( 'beforeend', '<div id="methodical-spelling-bee"></div>' );
+
+	render(
+		<MethodicalSpellingBee />,
+		document.querySelector( '#methodical-spelling-bee' )
+	);
 }
 
-// need to wait until after click play/continue to render? otherwise sometimes creates errors?
-render(
-	<MethodicalSpellingBee />,
-	document.querySelector( '#methodical-spelling-bee' )
-);
+const watching = 'object' === typeof module?.hot;
 
-if ( true ) { // detect webext reload
-	//console.clear();
-	console.log( '-------------------------------' ); // this happens after, but i want it to happen before
-	// so prob have to listen for hmr whatever, but that didn't work, because of interplay b/w webextrun and hmr?
-}
+if ( watching ) {
+	const playButton = document.querySelector( '.pz-moment__button' );
 
-// skip useless interstitial
-const playButton = document.querySelector( '.pz-moment__button' );
-if ( null !== playButton ) {
-	//playButton.click();
+	if ( null !== playButton ) {
+		// Timeout may be necessary to avoid it messing up and leaving the yellow background behind, or other bugs.
+		setTimeout(
+			function() {
+				// Skip useless interstitial.
+				playButton.click();
 
-	// only works sometimes, maybe b/c different class for "play" and "continue" ?
-
-	// sometimes leaves the yellow background
+				// Hide clutter.
+				document.querySelector( '.pz-footer' ).style.display = 'none';
+				document.getElementById( 'sb-conversion-banner' ).style.display = 'none';
+			},
+			500
+		);
+	}
 }
