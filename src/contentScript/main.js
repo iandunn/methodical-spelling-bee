@@ -7,9 +7,9 @@ import './index.css';
 const initialFoundWords = getFoundWords();
 const initialStats      = getInitialStats( initialFoundWords );
 
-export function MethodicalSpellingBee() {
+export function MethodicalSpellingBee( { ready: initialReady } ) {
 	const [ loading, setLoading ] = useState( true );
-	const [ ready, setReady ]     = useState( false );
+	const [ ready, setReady ]     = useState( initialReady );
 	const [ grid, setGrid ]       = useState( {} );
 	const [ stats, setStats ]     = useState( {} );
 	const [ activeLetterList, setActiveLetterList ] = useState( {} );

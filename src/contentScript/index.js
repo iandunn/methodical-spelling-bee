@@ -30,7 +30,7 @@ if ( null !== statusBox && null === msbContainer ) {
 	statusBox.insertAdjacentHTML( 'beforeend', '<div id="methodical-spelling-bee"></div>' );
 
 	render(
-		<MethodicalSpellingBee />,
+		<MethodicalSpellingBee ready={ watching } />,
 		document.querySelector( '#methodical-spelling-bee' )
 	);
 }
