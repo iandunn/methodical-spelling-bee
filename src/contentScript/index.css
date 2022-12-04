@@ -77,11 +77,19 @@
 	how to represent progress?
 	= make bg color green when done
 	= grey out when done
-	= show number remaining instead of total
+	= show number remaining instead of total.
+
+	probably better to just change colors, can do by adding class="done" in js
 	*/
 
 	/*margin-top: 3em;*/
 }
+
+#methodical__grid table td {
+	/* tmp formatting for the stubbed html */
+	padding: 3px;
+}
+
 
 /*
  * Two Letter List
@@ -92,6 +100,7 @@
 
 .methodical__pair-key {
 	padding-right: 5px;
+	text-transform: uppercase;
 }
 
 /* tmp so can focus

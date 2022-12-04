@@ -175,9 +175,7 @@ function getInitialStats( foundWords ) {
 
 // This just parses it out of the blog post, so it's fragile.
 function parseGrid( node ) {
-	const matrix = [];
-
-	return matrix;
+	return { __html: node.innerHTML };
 }
 
 // This just parses it out of the blog post, so it's fragile.
