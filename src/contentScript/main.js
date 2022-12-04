@@ -29,12 +29,12 @@ export function MethodicalSpellingBee() {
 				if ( Object.keys( emptyLetterList ).length ) {
 					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );
 					setActiveLetterList( lettersList );
-					setLoading( false );
 				}
 
-				// wrap in if succes?
 				setStats( stats );
 				setGrid( grid );
+
+				setLoading( false );
 			},
 
 			( error ) => {
