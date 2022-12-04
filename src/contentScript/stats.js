@@ -3,32 +3,26 @@ export function Stats( { stats } ) {
 		<div id="methodical__stats">
 			<h3>Stats</h3>
 
-			<table>
-				<tbody>
-					{ Object.keys( stats ).map( ( key, index ) => {
-						const { found, total } = stats[key];
+			<ul>
+				{ Object.keys( stats ).map( ( key, index ) => {
+					const { found, total } = stats[ key ];
 
-						const finished = found === total;
-						const classes  = finished ? 'methodical__finished' : '';
+					const finished = found === total;
+					const classes = finished ? 'methodical__finished' : '';
 
-						return (
-							<tr key={ index } className={ classes }>
-								<td>
-									<input type="checkbox" checked={ finished } disabled />
-								</td>
+					return (
+						<li key={ index } className={ classes }>
+							<input type="checkbox" checked={ finished } disabled />
 
-								<td className="methodical__stats-key-name">
-									{ key }
-								</td>
+							<span className="methodical__stats-key-name">
+								{ key }
+							</span>
 
-								<td>
-									{ found }/{ total }
-								</td>
-							</tr>
-						);
-					} )	}
-				</tbody>
-			</table>
+							{ found }/{ total }
+						</li>
+					);
+				} ) }
+			</ul>
 		</div>
 	);
 }

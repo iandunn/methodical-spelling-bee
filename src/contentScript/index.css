@@ -16,33 +16,17 @@
 
 */
 
-.methodical__finished {
-	color: green;
-}
 
 .sb-wordlist-box {
 	flex-basis: 350px; /* Make room for the #methodical-spelling-bee */
 	flex-grow: 0;
 }
 
-#methodical-spelling-bee {
-	margin: 12px 12px 40px 12px;
-	border-radius: 6px;
-	padding: 25px;
-	border: 1px solid #dcdcdc;
-
-	display: flex;
-	flex-wrap: wrap;
-	/* flex is dumb for this. just use grid that's what it's for */
 }
 
-#methodical-spelling-bee > div {
-	flex-basis: 50%;
-	/*wtf uncommenting this perevnt wrapping? why
 
-	flex-grow: 1;
-	flex-shrink: 0;
-	*/
+.methodical__finished {
+	color: green;
 }
 
 #methodical-spelling-bee h3 {
@@ -51,31 +35,50 @@
 	margin-bottom: 1em;
 }
 
+#methodical-spelling-bee {
+	display: grid;
+	grid-template-areas:
+		"stats           stats"
+		"two-letter-list grid"
+	;
+	grid-row-gap: 30px;
+	grid-column-gap: 40px;
+
+	margin: 12px 12px 40px 12px;
+	padding: 25px;
+	border: 1px solid #dcdcdc;
+	border-radius: 6px;
+}
+
+
 /*
  * Stats
  */
 #methodical__stats {
-	/* maybe make this go all the way across in a list w/ hidden disks,
-	 to be more visually simliar to how its shown in the https://www.nytimes.com/2022/12/03/crosswords/spelling-bee-forum.html pages
-	 that'd tie into changes above moving from flex to grid
-	 */
-
-
-	/*margin-bottom: 3em;*/
+	grid-area: stats;
 }
 
-#methodical__stats td {
-	padding: 3px;
+#methodical__stats ul {
+	display: flex;
+	justify-content: start;
+}
+
+#methodical__stats li {
+	margin-right: 35px;
 }
 
 .methodical__stats-key-name {
 	text-transform: capitalize;
+	margin-left: 5px;
+	margin-right: 5px;
 }
+
 
 /*
  * Grid
  */
 #methodical__grid {
+	grid-area: grid;
 
 	/*
 	how to represent progress?
@@ -83,10 +86,8 @@
 	= grey out when done
 	= show number remaining instead of total.
 
-	probably better to just change colors, can do by adding class="done" in js
+	probably use the `.finished` color like the others
 	*/
-
-	/*margin-top: 3em;*/
 }
 
 #methodical__grid table td {
@@ -98,6 +99,10 @@
 /*
  * Two Letter List
  */
+#methodical__letter-list-progress {
+	grid-area: two-letter-list;
+}
+
 #methodical__letter-list-progress input {
 	margin-right: 8px;
 }
