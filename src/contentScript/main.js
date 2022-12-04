@@ -1,5 +1,7 @@
 import { useEffect, useState  } from 'react';
+import { Stats }               from './stats.js';
 import { LetterListProgress }  from './letter-list-progress.js';
+import { Grid }                from './grid.js';
 import './index.css';
 
 const initialFoundWords = getFoundWords();
@@ -7,6 +9,8 @@ const initialFoundWords = getFoundWords();
 export function MethodicalSpellingBee() {
 	const [ loading, setLoading ] = useState( true );
 	const [ ready, setReady ]     = useState( false );
+	const [ grid, setGrid ]       = useState( {} );
+	const [ stats, setStats ]     = useState( {} );
 	const [ activeLetterList, setActiveLetterList ] = useState( {} );
 
 	const [ foo, setFoo ] = useState( 1 ); // tmp
@@ -17,7 +21,13 @@ export function MethodicalSpellingBee() {
 
 		todaysHints.then(
 			( result ) => {
+				const stats           = parseStats( result.querySelector( 'p:nth-of-type( 3 )' ) );
+				const grid            = parseGrid( result.querySelector( 'table' ) );
 				const emptyLetterList = parseTwoLetterList( result.querySelector( 'p:nth-of-type( 5 )' ) );
+
+				// wrap in if succes?
+				setStats( stats );
+				setGrid( grid );
 
 				if ( Object.keys( emptyLetterList ).length ) {
 					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );
@@ -62,7 +72,6 @@ export function MethodicalSpellingBee() {
 	}, [ activeLetterList ] );
 	// i think activeletterlist should be in ^, but not totally sure
 
-
 	if ( ! ready ) {
 		return (
 			<>
@@ -79,6 +88,8 @@ export function MethodicalSpellingBee() {
 				<p>Loading...</p>
 			}
 
+			{ ! loading && <Stats stats={ stats } /> }
+			{ ! loading && <Grid grid={ grid } /> }
 			{ ! loading && <LetterListProgress progress={ activeLetterList } /> }
 		</>
 	);
@@ -108,6 +119,34 @@ async function getTodaysHints() {
 	}
 
 	return wrapper;
+}
+
+// This just parses it out of the blog post, so it's fragile.
+function parseStats( node ) {
+	const stats = {};
+
+	const matches = node.innerText.match( /(\w+: \d+)/g );
+	let key, count;
+
+	for ( let pair of matches ) {
+		pair  = pair.split( ': ' );
+		key   = pair[0].toLowerCase();
+		count = parseInt( pair[1] );
+
+		stats[ key ] = {
+			found: 0,
+			total: count,
+		}
+	}
+
+	return stats;
+}
+
+// This just parses it out of the blog post, so it's fragile.
+function parseGrid( node ) {
+	const matrix = [];
+
+	return matrix;
 }
 
 // This just parses it out of the blog post, so it's fragile.

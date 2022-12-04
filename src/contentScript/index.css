@@ -48,6 +48,42 @@
 }
 
 /*
+ * Stats
+ */
+#methodical__stats {
+	/* maybe make this go all the way across in a list w/ hidden disks,
+	 to be more visually simliar to how its shown in the https://www.nytimes.com/2022/12/03/crosswords/spelling-bee-forum.html pages
+	 that'd tie into changes above moving from flex to grid
+	 */
+
+
+	/*margin-bottom: 3em;*/
+}
+
+#methodical__stats td {
+	padding: 3px;
+}
+
+.methodical__stats-key-name {
+	text-transform: capitalize;
+}
+
+/*
+ * Grid
+ */
+#methodical__grid {
+
+	/*
+	how to represent progress?
+	= make bg color green when done
+	= grey out when done
+	= show number remaining instead of total
+	*/
+
+	/*margin-top: 3em;*/
+}
+
+/*
  * Two Letter List
  */
 #methodical__letter-list-progress input {

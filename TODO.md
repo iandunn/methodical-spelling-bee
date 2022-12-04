@@ -4,8 +4,16 @@
 	buggy, see notes in main.js
 
 - [ ] bug: blank when first load after deleting local storage
+	still a problem?
 
-- [ ]  restrict url to just spelling bee page, not all nytiems
+- [ ] add overall stats
+	- [ ] WORDS: x/49
+	- [ ] POINTS: x/265
+	- [ ] PANGRAMS: x/3
+	- [ ] make the dom parsing bit DRY - have a func pull out the 2LL, grid, and stats, then pass to individual funcs to parse
+
+- [ ] add grid
+
 
 - [ ] set ready false to false in prod but true in dev, to make devex smoother
 	console.log( process.env.NODE_ENV ); // still says dev even w/ build  files
@@ -25,6 +33,37 @@
 
 -------------------------------
 devex
+
+- [ ] clear console on hmr reload
+	hmr isn't really working anyway. it refreses but changes in views aren't shown
+	maybe have to change the webxr --watch-file to something later?
+	or maybe there's conflict between wxr reload and webpack hmr?
+
+		// can't get working
+	//if ( module.hot ) {
+	//	module.hot.accept(); // already had this init code
+	//
+	//	module.hot.addStatusHandler( status => {
+	//		console.log( 'prep2', status );
+	//
+	//		if ( status === 'prepare' ) {
+	//			console.clear();
+	//		}
+	//	} );
+	//}
+
+	//window.addEventListener( 'message', function onWebpackMessage( event ) {
+	//	if ( true === event.data?.hello ) {
+	//		return;
+	//	}
+	//
+	//	console.log('before 8');
+	//	console.log( JSON.parse( event.data ) );
+	//	//console.clear();
+	//	console.log('after2');
+	//} );
+	//console.log( '-------------------------------' ); // this happens after, but i want it to happen before
+
 
 - [ ] beep when there's a compile error
 
@@ -48,11 +87,10 @@ devex
 
 post launch
 
-- [ ] add overall stats
-	- [ ] WORDS: x/49
-	- [ ] POINTS: x/265
-	- [ ] PANGRAMS: x/3
-	- [ ] make the dom parsing bit DRY - have a func pull out the 2LL, grid, and stats, then pass to individual funcs to parse
+- [ ]  restrict url to just spelling bee page, not all nytiems
+
+- [ ] add support for BINGO, # of perfect pangrams, etc in the stats
+
 - [ ] add the matrix of start+count, not sure how to show checkbox
 
 -------------------------------
