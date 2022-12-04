@@ -15,10 +15,10 @@ if ( watching ) {
 				playButton.click();
 
 				// Hide clutter.
-				document.querySelector( '.pz-footer' ).style.display = 'none';
+				document.querySelector( '.pz-footer' ).style.display            = 'none';
 				document.getElementById( 'sb-conversion-banner' ).style.display = 'none';
 			},
-			500
+			650
 		);
 	}
 }
