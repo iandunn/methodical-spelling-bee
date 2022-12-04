@@ -1,23 +1,4 @@
 /*
-
-- [ ] when stats/grid added, `#methodical-spelling-bee` is so tall that it overflow the footer
-	probably a css issue, like nyt is expecting content area to be an exact height or something
-
-- [ ] add colors, like green when 100% of pair found
-
-- [ ] make sure wordlist grows when needed as more words added
-	"you have words" gets cut off when make shorter than 350px, might need to adjust its styles to adapt
-
-- [ ] maybe add body class so can just make the tmp styles permanent, but only apply while node is running or whatever
-
-- [ ] make responsive
-
-- [ ] make two letter list two columns, or 3, or auto
-
-*/
-
-
-/*
  * NYTimes elements
  */
 .sb-wordlist-window {
@@ -26,7 +7,7 @@
 
 .sb-controls-box {
 	padding-top: 80px;
-	align-items: start;
+	align-items: flex-start;
 }
 
 
@@ -68,7 +49,7 @@
 
 #methodical__stats ul {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 #methodical__stats li {
@@ -89,6 +70,7 @@
 	grid-area: grid;
 
 	/*
+	todo
 	how to represent progress?
 	= make bg color green when done
 	= grey out when done
@@ -99,7 +81,7 @@
 }
 
 #methodical__grid table td {
-	/* tmp formatting for the stubbed html */
+	/* todo tmp formatting for the stubbed html */
 	padding: 3px;
 }
 
