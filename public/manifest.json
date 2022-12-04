@@ -3,6 +3,11 @@
 	"version"          : "0.0.1",
 	"name"             : "Methodical Spelling Bee",
 	"description"      : "Automatically tracks progress towards each hint for today's NY Times Spelling Bee.",
+	"icons": {
+		"48": "icon.svg",
+		"96": "icon.svg",
+		"551": "icon.svg"
+	},
 	"content_scripts"  : [
 		{
 			"matches" : [

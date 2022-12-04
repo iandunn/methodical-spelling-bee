@@ -1,16 +1,12 @@
 # v1
 
-- [ ] make grid dynamic
 
 - [ ] fix todos in main.js
 
-
-
-- [ ] update icon
+- [ ] get icon working
 		make sure svg works - https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/icons#svg
-		where does it get used?
+		where does it get used? in about:addons ?
 
-- [ ] unit write tests for some functions
 
 - [ ] webext lint (in the dev folder) shows some errors and warnings. some of it may just be from react/webpack/etc though
 
@@ -20,13 +16,19 @@
 
 - [ ] css isn't being applied when running from build folder
 
+- [ ] add to firefox extension directory
+- [ ] add to chrome extension directory
+
 -------------------------------
 devex
+
 
 - [ ] clear console on hmr reload
 	hmr isn't really working anyway. it refreses but changes in views aren't shown
 	maybe have to change the webxr --watch-file to something later?
-	or maybe there's conflict between wxr reload and webpack hmr?
+	or maybe there's conflict between webext reload and webpack hmr?
+		if run webext w/ `--no-reload` then nothing is reloaded, so webpack hmr isn't even running?
+
 
 		// can't get working
 	//if ( module.hot ) {
@@ -53,18 +55,15 @@ devex
 	//} );
 	//console.log( '-------------------------------' ); // this happens after, but i want it to happen before
 
+- [ ] do a full reload when needed
+	hmr is only working well when css changes
+	jsx changes aren't taking effect, have to manually reload
+	are js logic changes updating automatically?
+
+	maybe there's conflict between webext reload and webpack hmr?
 
 - [ ] beep when there's a compile error
 
-- [ ] new stylesheet gets added every time, instead of replacing old one? causes bugs
-
-- [ ] auto click on "play/continue" button after reloading page
-	only in dev env
-
-- [ ] clear console before hmr updates
-	https://github.com/webpack/webpack-dev-server/issues/565#issuecomment-449979431 doesn't work, neither do others in that issue
-		that clears after reloading, so don't see errors
-	maybe b/c webext is reloading
 
 - [ ] silence the "hmr waiting for update..." msg
 	maybe will automatically if get clear() working
@@ -75,6 +74,10 @@ devex
 -------------------------------
 
 post launch
+
+- [ ] make grid dynamic
+
+- [ ] unit write tests for some functions
 
 - [ ]  restrict url to just spelling bee page, not all nytiems
 
