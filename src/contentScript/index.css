@@ -16,6 +16,10 @@
 
 */
 
+.methodical__finished {
+	color: green;
+}
+
 .sb-wordlist-box {
 	flex-basis: 350px; /* Make room for the #methodical-spelling-bee */
 	flex-grow: 0;

@@ -8,10 +8,13 @@ export function Stats( { stats } ) {
 					{ Object.keys( stats ).map( ( key, index ) => {
 						const { found, total } = stats[key];
 
+						const finished = found === total;
+						const classes  = finished ? 'methodical__finished' : '';
+
 						return (
-							<tr key={ index }>
+							<tr key={ index } className={ classes }>
 								<td>
-									<input type="checkbox" checked={ found === total } disabled />
+									<input type="checkbox" checked={ finished } disabled />
 								</td>
 
 								<td className="methodical__stats-key-name">

@@ -7,11 +7,13 @@ export function LetterListProgress( { progress } ) {
 				<tbody>
 					{ Object.keys( progress ).map( ( key, index ) => {
 						const { found, total } = progress[key];
+						const finished = found === total;
+						const classes  = finished ? 'methodical__finished' : '';
 
 						return (
-							<tr key={ index }>
+							<tr key={ index } className={ classes }>
 								<td>
-									<input type="checkbox" checked={ found === total } disabled />
+									<input type="checkbox" checked={ finished } disabled />
 								</td>
 
 								<td className="methodical__pair-key">
