@@ -5,6 +5,7 @@ import { Grid }                from './grid.js';
 import './index.css';
 
 const initialFoundWords = getFoundWords();
+const initialStats      = getInitialStats( initialFoundWords );
 
 export function MethodicalSpellingBee() {
 	const [ loading, setLoading ] = useState( true );
@@ -21,7 +22,7 @@ export function MethodicalSpellingBee() {
 
 		todaysHints.then(
 			( result ) => {
-				const stats           = parseStats( result.querySelector( 'p:nth-of-type( 3 )' ), initialFoundWords );
+				const stats           = parseTotalStats( result.querySelector( 'p:nth-of-type( 3 )' ), initialStats );
 				const grid            = parseGrid( result.querySelector( 'table' ) );
 				const emptyLetterList = parseTwoLetterList( result.querySelector( 'p:nth-of-type( 5 )' ) );
 
@@ -122,29 +123,40 @@ async function getTodaysHints() {
 }
 
 // This just parses it out of the blog post, so it's fragile.
-function parseStats( node, foundWords ) {
-	const stats = {}; // start by setting what you wnat to end up w/, as a defense
-
+// can/should move this into stats.js? same for other things directly related to stats/grid/twoletter
+function parseTotalStats( node, stats ) {
 	const matches = node.innerText.match( /(\w+: \d+)/g );
 	let key, count;
 
-	// Get totals
 	for ( let pair of matches ) {
 		pair  = pair.split( ': ' );
 		key   = pair[0].toLowerCase();
 		count = parseInt( pair[1] );
 
-		stats[ key ] = {
-			found: 0,
-			total: count,
-		}
+		stats[ key ].total = count;
 	}
 
-	// Set initial `found` values
-	const currentPoints  = document.querySelector( '.sb-progress-value' );
-	stats.points.found   = parseInt( currentPoints.innerText );
-	stats.words.found    = foundWords.length;
-	stats.pangrams.found = document.querySelectorAll( '.sb-wordlist-items-pag span.pangram').length;
+	return stats;
+}
+
+// Get the initial `found` counts for each stat from the DOM.
+function getInitialStats( foundWords ) {
+	const stats = {
+		words: {
+			found: foundWords.length,
+			total: 0,
+		},
+
+		points: {
+			found: parseInt( document.querySelector( '.sb-progress-value' ).innerText ),
+			total: 0,
+		},
+
+		pangrams: {
+			found: document.querySelectorAll( '.sb-wordlist-items-pag span.pangram').length,
+			total: 0,
+		}
+	};
 
 	return stats;
 }
