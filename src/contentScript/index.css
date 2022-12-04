@@ -101,10 +101,3 @@
 	padding-right: 5px;
 	text-transform: uppercase;
 }
-
-/* tmp so can focus
- todo, move to index.js w/ other clutter hiding */
-.pz-game-header,
-.pz-ad-box {
-	display: none;
-}
