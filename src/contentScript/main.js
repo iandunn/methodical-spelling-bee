@@ -17,11 +17,7 @@ export function MethodicalSpellingBee() {
 
 		todaysHints.then(
 			( result ) => {
-				const parser  = new DOMParser();
-				const doc     = parser.parseFromString( result, 'text/html' );
-				const wrapper = doc.querySelector( 'section.interactive-content > div.interactive-body > div' );
-
-				const emptyLetterList = parseTwoLetterList( wrapper.querySelector( 'p:nth-of-type( 5 )' ) );
+				const emptyLetterList = parseTwoLetterList( result.querySelector( 'p:nth-of-type( 5 )' ) );
 
 				if ( Object.keys( emptyLetterList ).length ) {
 					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );	// set as state
@@ -129,10 +125,15 @@ export function MethodicalSpellingBee() {
 async function getTodaysHints() {
 	const link = document.querySelector( 'a.pz-toolbar-button__hints' );
 	let html;
+	let wrapper;
 
 	try {
 		const response = await fetch( link.href );
 		html           = await response.text();
+
+		const parser  = new DOMParser();
+		const doc     = parser.parseFromString( html, 'text/html' );
+		wrapper       = doc.querySelector( 'section.interactive-content > div.interactive-body > div' );
 
 	} catch ( error ) {
 		console.log( { error } );
@@ -144,7 +145,7 @@ async function getTodaysHints() {
 		}
 	}
 
-	return html;
+	return wrapper;
 }
 
 // This just parses it out of the blog post, so it's fragile.
