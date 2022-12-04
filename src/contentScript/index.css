@@ -17,14 +17,22 @@
 */
 
 
-.sb-wordlist-box {
-	flex-basis: 350px; /* Make room for the #methodical-spelling-bee */
-	flex-grow: 0;
+/*
+ * NYTimes elements
+ */
+.sb-wordlist-window {
+	height: fit-content !important;
 }
 
+.sb-controls-box {
+	padding-top: 80px;
+	align-items: start;
 }
 
 
+/*
+ * MSP elements
+ */
 .methodical__finished {
 	color: green;
 }
