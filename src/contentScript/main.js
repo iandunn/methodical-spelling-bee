@@ -72,25 +72,25 @@ export function MethodicalSpellingBee() {
 	}, [ activeLetterList ] );
 	// i think activeletterlist should be in ^, but not totally sure
 
+	if ( loading ) {
+		return (
+			<p>Loading...</p>
+		);
+	}
+
 	if ( ! ready ) {
 		return (
-			<>
-				<button onClick={ () => setReady( true ) }>
-					Ready for Hints
-				</button>
-			</>
+			<button onClick={ () => setReady( true ) }>
+				Ready for Hints
+			</button>
 		);
 	}
 
 	return (
 		<>
-			{ loading &&
-				<p>Loading...</p>
-			}
-
-			{ ! loading && <Stats stats={ stats } /> }
-			{ ! loading && <Grid grid={ grid } /> }
-			{ ! loading && <LetterListProgress progress={ activeLetterList } /> }
+			<Stats stats={ stats } />
+			<Grid grid={ grid } />
+			<LetterListProgress progress={ activeLetterList } />
 		</>
 	);
 }
