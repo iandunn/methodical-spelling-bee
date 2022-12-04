@@ -1,28 +1,31 @@
 export function LetterListProgress( { progress } ) {
 	return (
-		<table id="methodical__letter-list-progress">
-			<tbody>
-				{ Object.keys( progress ).map( ( key, index ) => {
-					const { found, total } = progress[key];
-					const checked = found === total ? 'checked' : '';
+		<div id="methodical__letter-list-progress">
+			<h3>Two Letter List</h3>
 
-					return (
-						<tr key={ index }>
-							<td>
-								<input type="checkbox" id="1" checked={ checked } disabled />
-							</td>
+			<table>
+				<tbody>
+					{ Object.keys( progress ).map( ( key, index ) => {
+						const { found, total } = progress[key];
 
-							<td className="methodical__pair-key">
-								{ key }
-							</td>
+						return (
+							<tr key={ index }>
+								<td>
+									<input type="checkbox" checked={ found === total } disabled />
+								</td>
 
-							<td>
-								({ found }/{ total })
-							</td>
-						</tr>
-					);
-				} )	}
-			</tbody>
-		</table>
+								<td className="methodical__pair-key">
+									{ key }
+								</td>
+
+								<td>
+									({ found }/{ total })
+								</td>
+							</tr>
+						);
+					} )	}
+				</tbody>
+			</table>
+		</div>
 	);
 }
