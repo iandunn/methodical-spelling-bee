@@ -55,8 +55,20 @@ export function MethodicalSpellingBee() {
 					const lettersList = bumpTwoLettersCount( activeLetterList, [ mutation.addedNodes[0].innerText ] );
 
 					setActiveLetterList( lettersList );
-					setFoo( Date.now() ); // todo UI only updates b/c this is changing state every timethis makes the ui update, but without this it doesn't update? why?
-					// maybe b/c activeletterlist is part of dependency array? no, same happens even when in array
+
+					// is it reliable to do this? maybe race conditions if points node is updated before word list node or something?
+					// probably better to have observer on the points node, but that wasn't working
+					stats.points.found   = parseInt( document.querySelector( '.sb-progress-value' ).innerText );
+					stats.words.found    = document.querySelectorAll( '.sb-wordlist-items-pag li' ).length;
+					stats.pangrams.found = document.querySelectorAll( '.sb-wordlist-items-pag span.pangram').length;
+						// maybe keep a copy in state rather than referencing the dom?
+						// make these dry w/ getInitialStats()?
+
+					setStats( stats ); // todo not working? ui isn't being updated
+
+					setFoo( Date.now() );
+					// todo UI for stats and 2LL only updates b/c this is changing state every timethis makes the ui update, but without this it doesn't update? why?
+					// maybe b/c activeletterlist isnt part of dependency array? no, same happens even when in array
 					// so it's something else
 					// todo try changing callback function decleration to use usecallback()
 				}
@@ -70,7 +82,7 @@ export function MethodicalSpellingBee() {
 		return function cleanup() {
 			observer.disconnect();
 		}
-	}, [ activeLetterList ] );
+	}, [ activeLetterList, stats ] );
 	// i think activeletterlist should be in ^, but not totally sure
 
 	if ( loading ) {
