@@ -2,31 +2,24 @@ import { useEffect, useState  } from 'react';
 import { LetterListProgress }  from './letter-list-progress.js';
 import './index.css';
 
+const initialFoundWords = getFoundWords();
+
 export function MethodicalSpellingBee() {
 	const [ loading, setLoading ] = useState( true );
 	const [ ready, setReady ]     = useState( false );
 	const [ activeLetterList, setActiveLetterList ] = useState( {} );
-	const initialFoundWords = getFoundWords();
 
 	// Fetch today's hints when component mounts.
 	useEffect( () => {
-		//console.log( 'fetch should only run once' );
 		const todaysHints = getTodaysHints();
-		// warning about foundwords dependency
-		// maybe the below should move outside the effect, and todayshints should be use a ref to save the value outside the effect?
 
 		todaysHints.then(
 			( result ) => {
 				const emptyLetterList = parseTwoLetterList( result.querySelector( 'p:nth-of-type( 5 )' ) );
 
 				if ( Object.keys( emptyLetterList ).length ) {
-					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );	// set as state
+					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );
 					setActiveLetterList( lettersList );
-					console.log( 'set active let list', activeLetterList ); // this shows it empty, but that's not true b/c i can see it working
-					// oh huh, when i add initialFoundWords to deps array below, then ^ starts working, but this func is called 3x a second
-					// so keep it in the deps array, and fix that constant rendering w/ useCallback(), like stackoverflow said?
-					// need to make sure it only runs once at load
-
 					setLoading( false );
 				}
 			},
