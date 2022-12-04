@@ -1,23 +1,10 @@
 # v1
 
-- [ ] update counts when new word accepted
-	buggy, see notes in main.js
+- [ ] make grid dynamic
 
-- [ ] bug: blank when first load after deleting local storage
-	still a problem?
-
-- [ ] add overall stats
-	- [ ] WORDS: x/49
-	- [ ] POINTS: x/265
-	- [ ] PANGRAMS: x/3
-	- [ ] make the dom parsing bit DRY - have a func pull out the 2LL, grid, and stats, then pass to individual funcs to parse
-
-- [ ] add grid
+- [ ] fix todos in main.js
 
 
-- [ ] set ready false to false in prod but true in dev, to make devex smoother
-	console.log( process.env.NODE_ENV ); // still says dev even w/ build  files
-	or at least set it manually back to false before committing
 
 - [ ] update icon
 		make sure svg works - https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/icons#svg
@@ -30,6 +17,8 @@
 - [ ] handle scraping errors gracefully b/c assume will change markup etc in future
 
 - [ ] why is upstream source.js saved? what is it? i don't remember
+
+- [ ] css isn't being applied when running from build folder
 
 -------------------------------
 devex
