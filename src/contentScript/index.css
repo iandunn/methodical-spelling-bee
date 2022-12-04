@@ -22,18 +22,34 @@
 }
 
 #methodical-spelling-bee {
-	margin: 12px;
+	margin: 12px 12px 40px 12px;
 	border-radius: 6px;
 	padding: 25px;
 	border: 1px solid #dcdcdc;
+
+	display: flex;
+	flex-wrap: wrap;
+	/* flex is dumb for this. just use grid that's what it's for */
 }
 
-#methodical-spelling-bee h2 {
+#methodical-spelling-bee > div {
+	flex-basis: 50%;
+	/*wtf uncommenting this perevnt wrapping? why
+
+	flex-grow: 1;
+	flex-shrink: 0;
+	*/
+}
+
+#methodical-spelling-bee h3 {
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 1em;
 }
 
+/*
+ * Two Letter List
+ */
 #methodical__letter-list-progress input {
 	margin-right: 8px;
 }
@@ -42,8 +58,8 @@
 	padding-right: 5px;
 }
 
-
-/* tmp so can focus */
+/* tmp so can focus
+ todo, move to index.js w/ other clutter hiding */
 .pz-game-header,
 .pz-ad-box {
 	display: none;
