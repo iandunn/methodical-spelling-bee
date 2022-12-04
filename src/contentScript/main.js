@@ -25,15 +25,15 @@ export function MethodicalSpellingBee() {
 				const grid            = parseGrid( result.querySelector( 'table' ) );
 				const emptyLetterList = parseTwoLetterList( result.querySelector( 'p:nth-of-type( 5 )' ) );
 
-				// wrap in if succes?
-				setStats( stats );
-				setGrid( grid );
-
 				if ( Object.keys( emptyLetterList ).length ) {
 					const lettersList = bumpTwoLettersCount( emptyLetterList, initialFoundWords );
 					setActiveLetterList( lettersList );
 					setLoading( false );
 				}
+
+				// wrap in if succes?
+				setStats( stats );
+				setGrid( grid );
 			},
 
 			( error ) => {
