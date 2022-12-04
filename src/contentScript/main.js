@@ -21,7 +21,7 @@ export function MethodicalSpellingBee() {
 
 		todaysHints.then(
 			( result ) => {
-				const stats           = parseStats( result.querySelector( 'p:nth-of-type( 3 )' ) );
+				const stats           = parseStats( result.querySelector( 'p:nth-of-type( 3 )' ), initialFoundWords );
 				const grid            = parseGrid( result.querySelector( 'table' ) );
 				const emptyLetterList = parseTwoLetterList( result.querySelector( 'p:nth-of-type( 5 )' ) );
 
@@ -122,12 +122,13 @@ async function getTodaysHints() {
 }
 
 // This just parses it out of the blog post, so it's fragile.
-function parseStats( node ) {
-	const stats = {};
+function parseStats( node, foundWords ) {
+	const stats = {}; // start by setting what you wnat to end up w/, as a defense
 
 	const matches = node.innerText.match( /(\w+: \d+)/g );
 	let key, count;
 
+	// Get totals
 	for ( let pair of matches ) {
 		pair  = pair.split( ': ' );
 		key   = pair[0].toLowerCase();
@@ -138,6 +139,12 @@ function parseStats( node ) {
 			total: count,
 		}
 	}
+
+	// Set initial `found` values
+	const currentPoints  = document.querySelector( '.sb-progress-value' );
+	stats.points.found   = parseInt( currentPoints.innerText );
+	stats.words.found    = foundWords.length;
+	stats.pangrams.found = document.querySelectorAll( '.sb-wordlist-items-pag span.pangram').length;
 
 	return stats;
 }
@@ -151,7 +158,7 @@ function parseGrid( node ) {
 
 // This just parses it out of the blog post, so it's fragile.
 function parseTwoLetterList( node ) {
-	//rename var?
+	//rename var? is so, do others too
 
 	const cleanText = node.innerHTML.replace( /<.*>/g, '' ).replace( /\s+/g, ' ' ).trim();
 	const keyCounts = cleanText.split( ' ' );
