@@ -2,7 +2,13 @@
  * NYTimes elements
  */
 .sb-wordlist-window {
-	height: fit-content !important;
+	height: 250px !important;
+}
+
+.sb-wordlist-items-pag > li {
+	width: fit-content;
+	max-width: calc(33.33% - 25px);
+	margin-right: 40px;
 }
 
 .sb-controls-box {
