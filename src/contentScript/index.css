@@ -45,6 +45,10 @@
 	border-radius: 6px;
 }
 
+.methodical__ready {
+	grid-area: stats; /* This has similar needs to the stats area. */
+}
+
 
 /*
  * Stats

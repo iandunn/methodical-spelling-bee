@@ -93,7 +93,7 @@ export function MethodicalSpellingBee( { ready: initialReady } ) {
 
 	if ( ! ready ) {
 		return (
-			<button onClick={ () => setReady( true ) }>
+			<button className="methodical__ready" onClick={ () => setReady( true ) }>
 				Ready for Hints
 			</button>
 		);

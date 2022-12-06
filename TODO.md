@@ -1,5 +1,11 @@
 # v1
 
+- [ ] maybe doesnt keep track of updated stats while not ready?
+	when playing w/ kelly the 'found' counts were at 0 when clicked ready button, even though had a bunch of words
+
+- [ ] ready button has grid gap below it, don't really want that
+
+
 
 - [ ] fix todos in main.js
 
