@@ -4,6 +4,7 @@
 	when playing w/ kelly the 'found' counts were at 0 when clicked ready button, even though had a bunch of words
 
 - [ ] ready button has grid gap below it, don't really want that
+	right now it shares styles w/ the "loaded" container which causes the problem
 
 
 

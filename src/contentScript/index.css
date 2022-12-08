@@ -92,7 +92,9 @@
 
 #methodical__grid table td {
 	/* todo tmp formatting for the stubbed html */
+	width: 24px;
 	padding: 3px;
+	text-align: right;
 }
 
 
